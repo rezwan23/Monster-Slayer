@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="vue.min.js"></script>
+    <title>Monster Slayer</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/foundation.min.css">
+    <link rel="stylesheet" href="css/app.css">
+    <style>
+      .log ul li:nth-child(2n+1){
+        background:#ff7367;
+      }
+      .log ul li:nth-child(2n){
+        background:#ffaf4f;
+      }
+    </style>
+</head>
+<body>
+<div id="app">
+    <section class="row">
+        <div class="small-6 columns">
+            <h1 class="text-center">YOU - {{myWidth}}</h1>
+            <div class="healthbar">
+                <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;" :style="{width: myWidth+'%'}">
+
+                </div>
+            </div>
+        </div>
+        <div class="small-6 columns">
+            <h1 class="text-center">MONSTER - {{ monsterWidth}}</h1>
+            <div class="healthbar">
+                <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;" :style="{width: monsterWidth+'%'}">
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="row controls" v-if="!show">
+        <div class="small-12 columns">
+            <button id="start-game" @click="start">START NEW GAME</button>
+        </div>
+    </section>
+    <section class="row controls" v-if="show">
+        <div class="small-12 columns">
+            <button id="attack" @click="attack">ATTACK</button>
+            <button id="special-attack" @click="spcAttack">SPECIAL ATTACK</button>
+            <button id="heal" @click="heal">HEAL</button>
+            <button id="give-up" @click="giveUp">GIVE UP</button>
+        </div>
+    </section>
+    <section class="row log">
+        <div class="small-12 columns">
+            <ul>
+                <li v-for="log in attackLogs">
+                    {{ log }}
+                </li>
+            </ul>
+        </div>
+    </section>
+</div>
+<script src="main.js"></script>
+</body>
+</html>
