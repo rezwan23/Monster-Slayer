@@ -53,7 +53,7 @@ button {
     margin: 10px;
 }
 
-#start-game {
+#start-game, .start-game {
     background-color: #aaffb0;
 }
 

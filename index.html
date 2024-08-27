@@ -17,9 +17,16 @@
 </head>
 <body>
 <div id="app">
-    <section class="row">
+    <section class="row" style="margin-top:30px;" v-if="!pns">
         <div class="small-6 columns">
-            <h1 class="text-center">YOU - {{myWidth}}</h1>
+            <input type="text" v-model="Player1Name" placeholder="Player 1 Name">
+            <input type="text" v-model="Player2Name" placeholder="Player 2 Name">
+            <button class="start-game" @click="setName">NEXT</button>
+        </div>
+    </section>
+    <section class="row" v-if="pns">
+        <div class="small-6 columns">
+            <h1 class="text-center">{{Player1Name}}(You) - {{myWidth}}</h1>
             <div class="healthbar">
                 <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;" :style="{width: myWidth+'%'}">
 
@@ -27,7 +34,7 @@
             </div>
         </div>
         <div class="small-6 columns">
-            <h1 class="text-center">MONSTER - {{ monsterWidth}}</h1>
+            <h1 class="text-center">{{Player2Name}} - {{ monsterWidth}}</h1>
             <div class="healthbar">
                 <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;" :style="{width: monsterWidth+'%'}">
 
@@ -35,12 +42,12 @@
             </div>
         </div>
     </section>
-    <section class="row controls" v-if="!show">
+    <section class="row controls" v-if="!show && pns">
         <div class="small-12 columns">
             <button id="start-game" @click="start">START NEW GAME</button>
         </div>
     </section>
-    <section class="row controls" v-if="show">
+    <section class="row controls" v-if="show && pns">
         <div class="small-12 columns">
             <button id="attack" @click="attack">ATTACK</button>
             <button id="special-attack" @click="spcAttack">SPECIAL ATTACK</button>
@@ -48,7 +55,7 @@
             <button id="give-up" @click="giveUp">GIVE UP</button>
         </div>
     </section>
-    <section class="row log">
+    <section class="row log" v-if="pns">
         <div class="small-12 columns">
             <ul>
                 <li v-for="log in attackLogs">

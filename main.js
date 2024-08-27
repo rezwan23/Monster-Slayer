@@ -6,9 +6,20 @@ new Vue({
     myDamage:0,
     monsterDamage:0,
     show: false,
-    attackLogs:[]
+    attackLogs:[],
+    Player1Name : '',
+    Player2Name : '',
+    pns : false,
+  },
+  computed:{
+    
   },
   methods:{
+    setName: function() {
+      if(this.Player1Name != '' && this.Player2Name != ''){
+        this.pns = true
+      }
+    },
     start: function(){
       if(this.show == false)
         this.show = true;
@@ -21,10 +32,10 @@ new Vue({
     attack: function(){
       this.myDamage = Math.floor(this.getRandomAttribute(15, 0));
       this.myWidth-=this.myDamage;
-      this.attackLogs.push('You are hurted '+this.myDamage+'points');
+      this.attackLogs.push(this.Player1Name + ' hurted '+this.myDamage+'points');
       this.monsterDamage = Math.floor(this.getRandomAttribute(15, 0));
       this.monsterWidth-=this.monsterDamage;
-      this.attackLogs.push('Monster is hurted '+this.monsterDamage+'points');
+      this.attackLogs.push(this.Player2Name + ' is hurted '+this.monsterDamage+'points');
       if(this.myWidth<=0){
         alert('You Loose!');
         this.start();
@@ -46,10 +57,10 @@ new Vue({
     spcAttack:function(){
       this.myDamage = Math.floor(this.getRandomAttribute(24, 0));
       this.myWidth-=this.myDamage;
-      this.attackLogs.push('You are hurted '+this.myDamage+'points');
+      this.attackLogs.push(this.Player1Name + ' hurted '+this.myDamage+'points');
       this.monsterDamage = Math.floor(this.getRandomAttribute(30, 0));
       this.monsterWidth-=this.monsterDamage;
-      this.attackLogs.push('Monster is hurted '+this.monsterDamage+'points');
+      this.attackLogs.push(this.Player2Name + ' is hurted '+this.monsterDamage+'points');
       if(this.myWidth<=0){
         alert('You Loose!');
         this.start();
@@ -74,7 +85,7 @@ new Vue({
       if(this.monsterWidth >= 100){
         this.monsterWidth = 100;
       }
-      this.attackLogs.push('Monster health healed to '+this.myWidth+' points');
+      this.attackLogs.push(this.Player2Name + ' health healed to '+this.myWidth+' points');
     }
   }
 });
